@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block content %}
+	{% for post in post_list %}		
+		<div style="margin-bottom: 20px;">
+			<h4>{{ post.title }}</h4>
+			{{ post.text|linebreaks }}
+			{% if post.tags %}
+			Tags:
+			<ul>
+				{% for tag in post.tags %}
+					<li><a href="?tag={{ tag.id }}">{{ tag }}</a></li>
+				{% endfor %}
+			</ul>			
+			{% endif %}
+			<a href="{{ post.get_absolute_url }}" class="btn btn-small">Read</a> 
+			<a href="{{ post.get_edit_url }}" class="btn btn-small">Edit</a> 
+			<a href="{{ post.get_delete_url }}" class="btn btn-small">Delete</a>
+		</div>
+	{% endfor %}
+{% endblock %}
